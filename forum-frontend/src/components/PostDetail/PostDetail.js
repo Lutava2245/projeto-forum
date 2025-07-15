@@ -8,7 +8,7 @@ export default function PostDetail() {
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        axios.get(`/api/posts/${id}`)
+        axios.get(`http://localhost:8080/api/posts/${id}`)
             .then(response => {
                 setPost(response.data);
             })

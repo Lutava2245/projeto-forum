@@ -93,7 +93,9 @@ public class PostServiceImpl implements PostService {
             post.getTitle(),
             post.getContent(),
             post.getAuthor(),
-            post.getLikes());
+            post.getLikes(),
+            post.getCreatedAt(),
+            post.getUpdatedAt());
     }
 
     public boolean verifyExistingPost(PostRequest postRequest) {

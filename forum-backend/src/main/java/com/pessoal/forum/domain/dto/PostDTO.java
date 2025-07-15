@@ -1,5 +1,7 @@
 package com.pessoal.forum.domain.dto;
 
+import java.time.LocalDateTime;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,4 +17,6 @@ public class PostDTO {
     private String content;
     private String author;
     private int likes;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 }
