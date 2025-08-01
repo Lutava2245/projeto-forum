@@ -1,31 +1,27 @@
 import axios from 'axios';
-import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 
 export default function PostList() {
     const [posts, setPosts] = useState([]);
-    const [error, setError] = useState(null);
+    const [error, setError] = useState([]);
 
     useEffect(() => {
-        axios.get('http://localhost:8080/api/posts')
+        axios.get(`http://localhost:8080/api/posts`)
             .then(response => {
                 setPosts(response.data);
             })
             .catch(error => {
-                console.error("There was an error fetching the posts!", error);
+                console.error("Ocoreu um erro ao procurar postagens!", error);
                 setError("Could not load posts");
             });
     }, []);
 
-    if (error) {
-        return (
-            <div className="post-list">
-                <p className="error">{error}</p>
-            </div>
-        );
-    }
-
-    return (
+    return error === "Could not load posts" ? (
+        <div className="post-list">
+            <p className="error">{error}</p>
+        </div>
+    ) : (
         <div className="post-list">
             <h1>Lista de Postagens</h1>
             <ul>
