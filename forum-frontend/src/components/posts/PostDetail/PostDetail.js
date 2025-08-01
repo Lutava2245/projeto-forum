@@ -34,6 +34,7 @@ export default function PostDetail() {
                 <tbody><tr>
                     <td><Link to="/posts">Voltar para a lista de postagens</Link></td>
                     <td><Link to={`/posts/delete/${id}`}>Excluir postagem</Link></td>
+                    <td><Link to={`/posts/edit/${id}`}>Editar postagem</Link></td>
                 </tr></tbody>
             </table>
             

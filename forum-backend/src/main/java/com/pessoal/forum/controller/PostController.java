@@ -72,6 +72,6 @@ public class PostController {
     public ResponseEntity<PostDTO> deletePost(@PathVariable long id) { 
         boolean deleted = postService.deletePost(id);
 
-        return deleted ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
+        return deleted ? ResponseEntity.noContent().build() : ResponseEntity.internalServerError().build();
     }
 }

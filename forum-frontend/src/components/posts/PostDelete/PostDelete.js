@@ -1,11 +1,10 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import NotFound from "../../NotFound/NotFound";
 
 export default function PostDelete() {
     const { id } = useParams();
-    const navigate = useNavigate();
 
     const [post, setPost] = useState([]);
     const [status, setStatus] = useState([]);
@@ -63,7 +62,7 @@ export default function PostDelete() {
             <table>
                 <thead><tr><td><p>Deseja excluir a postagem?</p></td></tr></thead>
                 <tbody><tr><td><button onClick={deletePost}>Excluir</button></td></tr></tbody>
-                <tfoot><tr><td><Link to="/posts">Voltar para a lista de postagens</Link></td></tr></tfoot>
+                <tfoot><tr><td><Link to={`/posts/${id}`}>Voltar para postagem</Link></td></tr></tfoot>
             </table>
         </div>
     )
