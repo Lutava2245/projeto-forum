@@ -1,19 +1,18 @@
 package com.pessoal.forum.domain.model;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.PrePersist;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -28,15 +27,11 @@ import lombok.ToString;
 @RequiredArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "posts")
-public class Post {
+@Table(name = "comments")
+public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
-    @NonNull
-    @Column(nullable = false, length = 100)
-    private String title;
 
     @NonNull
     @Column(nullable = false, length = 500)
@@ -46,9 +41,6 @@ public class Post {
     @Column(nullable = false, length = 50)
     private String author;
 
-    @Column(nullable = false)
-    private int likes;
-
     @CreationTimestamp
     @Column(nullable = false)
     private LocalDateTime createdAt;
@@ -57,11 +49,7 @@ public class Post {
     @Column(nullable = false)
     private LocalDateTime updatedAt;
 
-    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
-    private List<Comment> comments;
-
-    @PrePersist
-    public void onPersist() {
-        this.likes = 0;
-    }
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="post_id", nullable=false)
+    private Post post;
 }
